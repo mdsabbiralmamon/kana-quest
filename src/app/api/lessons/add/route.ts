@@ -1,5 +1,3 @@
-// File: app/api/admin/lessons/route.ts
-
 import connectDB from '@/lib/db/config/connect';
 import Lesson from '@/lib/db/models/Lesson';
 import { NextRequest, NextResponse } from 'next/server';
