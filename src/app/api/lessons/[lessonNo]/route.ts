@@ -7,8 +7,8 @@ export async function GET(req: NextRequest, { params }: { params: { lessonNo: st
   try {
     await connectDB();
 
-    // Extract lessonNo from context.params
-    const { lessonNo } = params; 
+     // @next-codemod-ignore - I am intentionally not awaiting params here
+    const { lessonNo } = params; // <-- Await the params here
     
     // Convert lessonNo to ObjectId if needed
     const lesson = await Lesson.findById(new ObjectId(lessonNo));
