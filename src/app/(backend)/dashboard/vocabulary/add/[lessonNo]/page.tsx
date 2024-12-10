@@ -1,7 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation'; // Get lessonNo from the URL
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation'; // Get lessonNo from the URL
+
+// Define vocabulary type
+interface Vocabulary {
+  _id: string;
+  word: string;
+  pronunciation: string;
+  whenToSay: string;
+}
 
 const AddVocabularyPage = () => {
   const { lessonNo } = useParams();
@@ -9,8 +17,8 @@ const AddVocabularyPage = () => {
   const [pronunciation, setPronunciation] = useState('');
   const [whenToSay, setWhenToSay] = useState('');
   const [loading, setLoading] = useState(false);
-  const [vocabularies, setVocabularies] = useState<any[]>([]);
-  const [lessonTitle, setLessonTitle] = useState<any>(null);
+  const [vocabularies, setVocabularies] = useState<Vocabulary[]>([]); // Use proper Vocabulary type
+  const [lessonTitle, setLessonTitle] = useState<string | null>(null); // Correct type for lessonTitle
 
   // Fetch the existing vocabulary for the current lesson
   const fetchVocabulary = async () => {
@@ -33,7 +41,6 @@ const AddVocabularyPage = () => {
       const data = await res.json();
 
       if (res.ok) {
-        // console.log('Lesson title:', data.lesson.title);
         setLessonTitle(data.lesson.title);
       } else {
         console.error('Failed to fetch lesson details.');
@@ -49,6 +56,7 @@ const AddVocabularyPage = () => {
   useEffect(() => {
     if (lessonNo) {
       fetchLessonDetails();
+      fetchVocabulary();
     }
   }, [lessonNo]);
 
@@ -89,11 +97,6 @@ const AddVocabularyPage = () => {
       console.error('Failed to delete vocabulary:', error);
     }
   };
-
-  // Fetch vocabulary on component mount
-  useEffect(() => {
-    fetchVocabulary();
-  }, [lessonNo]);
 
   return (
     <div className="p-6">

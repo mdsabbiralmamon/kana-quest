@@ -3,7 +3,7 @@ import connectDB from "@/lib/db/config/connect";
 import Vocabulary from "@/lib/db/models/Vocabulary";
 import { getToken } from "next-auth/jwt";
 
-export async function DELETE(req: NextRequest, { params }: { params: { lessonNo: string } }) {
+export async function DELETE(req: NextRequest) {
   const token = await getToken({ req });
 
   // Authorization check (Only admin can delete vocabulary)

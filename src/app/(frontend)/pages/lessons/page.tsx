@@ -23,8 +23,9 @@ const LessonsPage = () => {
       } else {
         setError(data.message || 'Failed to fetch lessons.');
       }
-    } catch (err) {
+    } catch (error) {
       setError('An error occurred while fetching lessons.');
+      console.error(error); // Log the actual error for debugging purposes
     } finally {
       setLoading(false);
     }
