@@ -4,7 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
 // Add vocabulary
-export async function POST(req: NextRequest, { params }: { params: { lessonNo: string } }) {
+export async function POST(req: NextRequest, props: { params: Promise<{ lessonNo: string }> }) {
+  const params = await props.params;
   const token = await getToken({ req });
 
   if (!token || token.role !== 'admin') {

@@ -2,7 +2,7 @@ import connectDB from '@/lib/db/config/connect';
 import Vocabulary from '@/lib/db/models/Vocabulary';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest, context: { params: { lessonNo: string } }) {
+export async function GET(req: NextRequest, context: { params: Promise<{ lessonNo: string }> }) {
   try {
     await connectDB();
 

@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db/config/connect';
 import Lesson from '@/lib/db/models/Lesson';
 
-export async function GET(req: NextRequest, context: { params: Record<string, string> }) {
+export async function GET(req: NextRequest, context: { params: Promise<Record<string, string>> }) {
   try {
     await connectDB();
 
     // Extract lessonNo from the context.params
-    const { lessonNo } = context.params; // Ensure this is awaited, or handled correctly
+    const { lessonNo } = (await context.params); // Ensure this is awaited, or handled correctly
 
     const lesson = await Lesson.findById(lessonNo);
     if (!lesson) {
