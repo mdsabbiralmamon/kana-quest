@@ -22,7 +22,6 @@ const handler = NextAuth({
           throw new Error("Email and password are required.");
         }
 
-        // Call your backend API to verify user credentials
         const res = await fetch(`${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/public/users/signin`, {
           method: "POST",
           body: JSON.stringify({
@@ -38,13 +37,12 @@ const handler = NextAuth({
           throw new Error(user?.message || "Invalid credentials.");
         }
 
-        // Ensure that user object contains necessary fields
         return {
           id: user.id,
           name: user.name,
           email: user.email,
           role: user.role,
-          photo: user.photo || null, // Add photo property
+          photo: user.photo || null,
         };
       },
     }),
@@ -56,8 +54,8 @@ const handler = NextAuth({
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
-        token.role = user.role; // Include role in the token
-        token.photo = user.photo; // Include photo in the token
+        token.role = user.role;
+        token.photo = user.photo;
       }
       return token;
     },
@@ -67,13 +65,13 @@ const handler = NextAuth({
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
-        session.user.role = token.role; // Include role in the session
-        session.user.photo = token.photo; // Include photo in the session
+        session.user.role = token.role;
+        session.user.photo = token.photo;
       }
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET, // Use your secret for JWT signing
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };
