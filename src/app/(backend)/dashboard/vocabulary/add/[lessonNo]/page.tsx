@@ -5,7 +5,6 @@ import { useParams, useRouter } from 'next/navigation'; // Get lessonNo from the
 
 const AddVocabularyPage = () => {
   const { lessonNo } = useParams();
-  const router = useRouter();
   const [word, setWord] = useState('');
   const [pronunciation, setPronunciation] = useState('');
   const [whenToSay, setWhenToSay] = useState('');
