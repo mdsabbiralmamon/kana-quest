@@ -3,14 +3,22 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';  // For navigation to the vocabulary page
 
+// Define the Lesson type
+interface Lesson {
+  _id: string;
+  title: string;
+  description: string;
+}
+
 const LessonManagement = () => {
-  const [lessons, setLessons] = useState<any[]>([]); // Use a proper type later
+  const [lessons, setLessons] = useState<Lesson[]>([]); // Use the Lesson type here
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
+  // Fetch lessons
   const fetchLessons = async () => {
     try {
       const res = await fetch('/api/lessons');
@@ -23,6 +31,7 @@ const LessonManagement = () => {
     }
   };
 
+  // Add lesson
   const handleAddLesson = async () => {
     setLoading(true);
     try {
@@ -43,6 +52,7 @@ const LessonManagement = () => {
     }
   };
 
+  // Delete lesson
   const handleDeleteLesson = async (lessonId: string) => {
     try {
       const res = await fetch(`/api/lessons/delete?lessonId=${lessonId}`, {
@@ -56,8 +66,8 @@ const LessonManagement = () => {
     }
   };
 
+  // Navigate to add vocabulary page
   const handleAddVocabulary = (lessonId: string) => {
-    // Navigate to the Add Vocabulary page for the specific lesson
     router.push(`/dashboard/vocabulary/add/${lessonId}`);
   };
 
@@ -92,7 +102,7 @@ const LessonManagement = () => {
         </button>
       </div>
       <ul>
-        {lessons.map((lesson: any) => (
+        {lessons.map((lesson) => (
           <li key={lesson._id} className="flex justify-between p-4 bg-gray-100 mb-2 rounded shadow">
             <div>
               <h2 className="font-bold">{lesson.title}</h2>
