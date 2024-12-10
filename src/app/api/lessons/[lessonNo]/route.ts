@@ -1,8 +1,8 @@
 import connectDB from '@/lib/db/config/connect';
 import Lesson from '@/lib/db/models/Lesson';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest, { params }: { params: { [key: string]: string } }) {
+export async function GET(request: Request, { params }: { params: { lessonNo: string } }) {
   try {
     await connectDB();
 
