@@ -3,11 +3,12 @@ import Lesson from '@/lib/db/models/Lesson';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request, { params }: { params: { lessonNo: string } }) {
+    /* @next-codemod-ignore */
   try {
     await connectDB();
 
-    // Extract lessonNo from the params
-    const { lessonNo } = params;
+    // Await params to ensure it's ready before using it
+    const { lessonNo } = await params;  // Await here
 
     // Find the lesson using the provided `lessonNo`
     const lesson = await Lesson.findById(lessonNo);
