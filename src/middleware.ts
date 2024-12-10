@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
 
   // Define public and private routes
   const publicRoutes = ["/pages/signin", "/pages/signup", "/api/public", "/favicon.ico", "/_next"];
-  const adminRoutes = ["/admin", "/admin/dashboard"];
+  const adminRoutes = ["/dashboard/admin", "/dashboard/users", "/api/users/promote", "/api/users/demote", "/api/users/delete"];
   const privateRoutes = ["/dashboard", "/profile", "/lessons", "/tutorials"];
 
   // Allow access to public routes
