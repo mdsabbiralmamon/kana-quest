@@ -3,12 +3,12 @@ import Lesson from '@/lib/db/models/Lesson';
 import { NextRequest, NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
 
-export async function GET(request: NextRequest, context: { params: { lessonNo: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { lessonNo: string } }) {
   try {
     await connectDB();
 
     // Extract lessonNo from context.params
-    const { lessonNo } = context.params; 
+    const { lessonNo } = params; 
     
     // Convert lessonNo to ObjectId if needed
     const lesson = await Lesson.findById(new ObjectId(lessonNo));
