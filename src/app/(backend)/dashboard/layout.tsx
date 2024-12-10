@@ -7,6 +7,7 @@ import { FaUser } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import { signOut } from 'next-auth/react';
 import { RxAvatar } from 'react-icons/rx';
+import { MdPostAdd } from 'react-icons/md';
 
 interface Props {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
   const menuItems = [
     { name: 'Profile Manager', href: '/dashboard', icon: <RxAvatar /> },
     { name: 'User Manager', href: '/dashboard/users', icon: <FaUser /> },
+    { name: 'Lesson Manager', href: '/dashboard/lessons', icon: <MdPostAdd /> },
   ];
 
   return (
