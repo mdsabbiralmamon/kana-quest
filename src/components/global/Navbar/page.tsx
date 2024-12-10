@@ -11,7 +11,7 @@ const Navbar = () => {
         link: '/'
     }, {
         name: 'Lessons',
-        link: '/lessons'
+        link: '/pages/lessons'
     }, {
         name: 'Tutorials',
         link: '/tutorials'
