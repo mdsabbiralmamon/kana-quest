@@ -31,7 +31,7 @@ export default function SignUp() {
       }
 
       // Success: Navigate to sign-in page
-      router.push("/signin");
+      router.push("/pages/signin");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message); // Now `error` is known to be an instance of `Error`
