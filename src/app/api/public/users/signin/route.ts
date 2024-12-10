@@ -9,6 +9,7 @@ export async function POST(request: Request) {
 
     const { email, password } = await request.json();
 
+    // Check if email and password are provided
     if (!email || !password) {
       return NextResponse.json(
         { serverStatus: "Error", message: "Email and password are required." },
@@ -16,6 +17,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // Find the user in the database by email
     const user = await User.findOne({ email });
     if (!user) {
       return NextResponse.json(
@@ -24,6 +26,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if the password is correct
     const isPasswordValid = await bcrypt.compare(password, user.password || "");
     if (!isPasswordValid) {
       return NextResponse.json(
@@ -32,12 +35,13 @@ export async function POST(request: Request) {
       );
     }
 
-    // Securely create a user object for NextAuth
+    // Create a user response object, including the photo field
     const userResponse = {
       id: user._id.toString(),
       name: user.name,
       email: user.email,
       role: user.role,
+      photo: user.photo || null,
     };
 
     return NextResponse.json(userResponse, { status: 200 });
