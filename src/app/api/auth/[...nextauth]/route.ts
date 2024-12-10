@@ -44,6 +44,7 @@ const handler = NextAuth({
           name: user.name,
           email: user.email,
           role: user.role,
+          photo: user.photo || null, // Add photo property
         };
       },
     }),
@@ -56,6 +57,7 @@ const handler = NextAuth({
         token.name = user.name;
         token.email = user.email;
         token.role = user.role; // Include role in the token
+        token.photo = user.photo; // Include photo in the token
       }
       return token;
     },
@@ -66,6 +68,7 @@ const handler = NextAuth({
         session.user.name = token.name;
         session.user.email = token.email;
         session.user.role = token.role; // Include role in the session
+        session.user.photo = token.photo; // Include photo in the session
       }
       return session;
     },
