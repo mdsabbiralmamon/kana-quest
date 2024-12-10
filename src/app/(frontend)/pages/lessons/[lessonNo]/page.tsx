@@ -147,7 +147,7 @@ const LessonDetailsPage = () => {
             Congratulations!
           </h1>
           <p className="text-lg text-center text-gray-700 mb-6">
-            You have successfully completed <strong>Lesson {lessonNo}</strong>!
+            You have successfully completed <strong>Lesson {lessonTitle}</strong>!
           </p>
           <button
             className="bg-blue-500 text-white px-6 py-2 rounded shadow hover:bg-blue-600"
