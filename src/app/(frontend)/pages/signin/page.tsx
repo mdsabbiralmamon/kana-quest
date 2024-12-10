@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -10,8 +9,7 @@ export default function SignIn() {
   const [error, setError] = useState("");
 
   
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const callbackUrl = "/";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
