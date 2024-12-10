@@ -1,15 +1,16 @@
 import connectDB from '@/lib/db/config/connect';
 import Lesson from '@/lib/db/models/Lesson';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { ObjectId } from 'mongodb';
 
-export async function GET(request: Request, { params }: { params: { lessonNo: string } }) {
+export async function GET(_: NextRequest, { params }: { params: { lessonNo: string } }) {
     try {
       await connectDB();
   
-      // @next-codemod-ignore - I am intentionally not awaiting params here
-      const { lessonNo } = params;  // @next-codemod-ignore
+     
+      const { lessonNo } = params; 
   
-      const lesson = await Lesson.findById(lessonNo);
+      const lesson = await Lesson.findById(new ObjectId(lessonNo));
       if (!lesson) {
         return NextResponse.json(
           { serverStatus: 'Error', message: 'Lesson not found' },
